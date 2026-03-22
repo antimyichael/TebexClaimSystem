@@ -1,0 +1,46 @@
+products:
+  vip_rank:
+    displayName: "&6VIP Rank"
+    itemMaterial: "EMERALD"
+    requiredSlotsPerUnit: 1
+    commands:
+      - "lp user {player} parent set vip"
+  starter_kit:
+    displayName: "&bStarter Kit"
+    itemMaterial: "CHEST"
+    requiredSlotsPerUnit: 2
+    commands:
+      - "give {player} diamond_sword 1"
+      - "give {player} bread 16"
+
+gui:
+  title: "&8Claim Store"
+  size: 54
+  claimAllSlot: 49
+  claimAllName: "&aClaim All"
+  claimAllMaterial: "EMERALD_BLOCK"
+  quantityLore: "&7Quantity: &f{quantity}"
+
+messages:
+  prefix: "&8[&aTebexClaimSystem&8] &r"
+  notifyPendingOnJoin: "{prefix}&aYou have pending store items. Use &e/tebexclaimsystem &ato claim them."
+  notifyPendingReminder: "{prefix}&aReminder: you still have pending store items. Use &e/tebexclaimsystem &ato claim them."
+  noPendingClaims: "{prefix}&7You have no pending claims."
+  claimSuccess: "{prefix}&aClaimed &f{quantity}x {productDisplay}&a. Thanks for your purchase!"
+  claimAllSuccess: "{prefix}&aClaimed all pending items (&f{count}&a products). Thanks for your purchase!"
+  inventoryFull: "{prefix}&cYou need at least &f{neededSlots}&c empty inventory slots to claim this."
+  inventoryFullAll: "{prefix}&cYou need at least &f{neededSlots}&c empty inventory slots to claim everything."
+  unknownProduct: "{prefix}&cThis product is not configured: &f{product}&c."
+  consoleOnlyAdd: "{prefix}&cOnly console can use add."
+  invalidQuantity: "{prefix}&cQuantity must be a positive number."
+  noPermissionReload: "{prefix}&cYou do not have permission to reload this plugin."
+  reloadSuccess: "{prefix}&aConfig reloaded successfully."
+  reloadFailed: "{prefix}&cFailed to reload config.yml. Check console for details."
+  usagePlayer: "{prefix}&eUse /tebexclaimsystem to open your claim GUI."
+  usageConsole: "{prefix}&eUsage: tebexclaimsystem <add <username> <productName> <quantity>|reload>"
+  claimAdded: "{prefix}&aAdded &f{quantity}x {product}&a to &f{player}&a's pending claims."
+  noClaimForProduct: "{prefix}&cNo pending claim found for that product."
+  claimAllNothing: "{prefix}&7You have nothing to claim right now."
+  clickHint: "&eLeft-click to claim all"
+  clickHintRight: "&eRight-click to claim 1"
+

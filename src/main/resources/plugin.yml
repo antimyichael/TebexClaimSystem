@@ -1,0 +1,16 @@
+name: TebexClaimSystem
+main: org.datathorn.claimstore.TebexClaimSystemPlugin
+version: ${version}
+author: datathorn
+commands:
+  tebexclaimsystem:
+    description: Open the claim GUI or add Tebex claims from console.
+    usage: /<command> [add <username> <productName> <quantity>|reload]
+    aliases: [tcs, claimstore, claims, webstoreclaim, wsc, tebexclaim, tclaim, store, storeclaim]
+permissions:
+  tebexclaimsystem.use:
+    default: true
+  tebexclaimsystem.reload:
+    default: op
+
+
