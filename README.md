@@ -26,14 +26,36 @@ TebexClaimSystem is a Minecraft 1.8 Bukkit/Spigot plugin that lets players claim
 - `/tebexclaimsystem` - Opens the claim GUI for players.
 - Aliases: `/tcs`, `/claimstore`, `/claims`, `/webstoreclaim`, `/wsc`.
 - `tebexclaimsystem add <username> <productName> <quantity>` - Console-only command (intended for Tebex delivery).
+- `/tebexclaimsystem addfromlist <fileName> <productName> <quantity>` - Adds pending claims for all players listed in a YAML file (`tebexclaimsystem.admin`, default `op`, or console).
 - `/tebexclaimsystem reload` - Reloads `config.yml` without restarting the server (`tebexclaimsystem.reload`, default `op`).
 
-### Tebex console example
+### Console and Admin examples
 
 ```text
 tebexclaimsystem add Notch vip_rank 1
 tebexclaimsystem add Notch starter_kit 2
+tebexclaimsystem addfromlist access_list.yml ExampleProduct 1
 ```
+
+### Access list file formats (`access_list.yml`)
+
+The file can be located in `plugins/TebexClaimSystem/` or the server root folder. The parser supports:
+1. Standard YAML list:
+   ```yaml
+   - Player1
+   - Player2
+   ```
+2. Plain usernames line-by-line:
+   ```text
+   Player1
+   Player2
+   ```
+3. Grouped under a key (e.g. `players:` or `users:`):
+   ```yaml
+   players:
+     - Player1
+     - Player2
+   ```
 
 ## Configuration reference
 

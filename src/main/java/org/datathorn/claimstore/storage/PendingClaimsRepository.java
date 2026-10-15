@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,19 @@ public class PendingClaimsRepository {
         String productKey = normalize(product);
         int current = config.getInt(path(playerKey, productKey), 0);
         config.set(path(playerKey, productKey), current + quantity);
+        save();
+    }
+
+    public synchronized void addClaims(Collection<String> players, String product, int quantity) {
+        if (players == null || players.isEmpty() || quantity <= 0) {
+            return;
+        }
+        String productKey = normalize(product);
+        for (String player : players) {
+            String playerKey = normalize(player);
+            int current = config.getInt(path(playerKey, productKey), 0);
+            config.set(path(playerKey, productKey), current + quantity);
+        }
         save();
     }
 
@@ -88,7 +102,9 @@ public class PendingClaimsRepository {
         try {
             config.save(file);
         } catch (IOException ex) {
-            plugin.getLogger().warning("Failed saving pending claims: " + ex.getMessage());
+            if (plugin != null) {
+                plugin.getLogger().warning("Failed saving pending claims: " + ex.getMessage());
+            }
         }
     }
 
@@ -101,7 +117,7 @@ public class PendingClaimsRepository {
     }
 
     private void ensureFile() {
-        if (!plugin.getDataFolder().exists() && !plugin.getDataFolder().mkdirs()) {
+        if (plugin != null && !plugin.getDataFolder().exists() && !plugin.getDataFolder().mkdirs()) {
             plugin.getLogger().warning("Could not create plugin data folder.");
             return;
         }
@@ -110,11 +126,18 @@ public class PendingClaimsRepository {
         }
 
         try {
+            if (file.getParentFile() != null && !file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             if (!file.createNewFile()) {
-                plugin.getLogger().warning("Could not create pending claims file.");
+                if (plugin != null) {
+                    plugin.getLogger().warning("Could not create pending claims file.");
+                }
             }
         } catch (IOException ex) {
-            plugin.getLogger().warning("Failed creating pending claims file: " + ex.getMessage());
+            if (plugin != null) {
+                plugin.getLogger().warning("Failed creating pending claims file: " + ex.getMessage());
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import org.datathorn.claimstore.listener.PlayerJoinListener;
 import org.datathorn.claimstore.service.ClaimLogger;
 import org.datathorn.claimstore.service.ClaimService;
 import org.datathorn.claimstore.service.MessageService;
+import org.datathorn.claimstore.service.PlayerListParser;
 import org.datathorn.claimstore.service.ProductRegistry;
 import org.datathorn.claimstore.storage.PendingClaimsRepository;
 import org.bukkit.entity.Player;
@@ -28,6 +29,9 @@ public class TebexClaimSystemPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        if (!new File(getDataFolder(), "access_list.yml").exists()) {
+            saveResource("access_list.yml", false);
+        }
 
         messageService = new MessageService(this);
         productRegistry = new ProductRegistry(this);
@@ -36,10 +40,14 @@ public class TebexClaimSystemPlugin extends JavaPlugin {
         claimService = new ClaimService(this, repository, productRegistry, messageService, claimLogger);
         ClaimsGui claimsGui = new ClaimsGui(this, claimService, productRegistry, messageService);
 
-        TebexClaimSystemCommand command = new TebexClaimSystemCommand(this, claimService, claimsGui, productRegistry, messageService);
+        PlayerListParser playerListParser = new PlayerListParser();
+        TebexClaimSystemCommand command = new TebexClaimSystemCommand(
+                this, claimService, claimsGui, productRegistry, messageService, playerListParser
+        );
         PluginCommand rootCommand = getCommand("tebexclaimsystem");
         if (rootCommand != null) {
             rootCommand.setExecutor(command);
+            rootCommand.setTabCompleter(command);
         } else {
             getLogger().severe("Command tebexclaimsystem not found in plugin.yml");
         }

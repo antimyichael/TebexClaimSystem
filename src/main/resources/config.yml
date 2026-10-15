@@ -1,4 +1,10 @@
 products:
+  exampleproduct:
+    displayName: "&eExample Product"
+    itemMaterial: "DIAMOND"
+    requiredSlotsPerUnit: 1
+    commands:
+      - "give {player} diamond 1"
   vip_rank:
     displayName: "&6VIP Rank"
     itemMaterial: "EMERALD"
@@ -34,13 +40,18 @@ messages:
   consoleOnlyAdd: "{prefix}&cOnly console can use add."
   invalidQuantity: "{prefix}&cQuantity must be a positive number."
   noPermissionReload: "{prefix}&cYou do not have permission to reload this plugin."
+  noPermissionAddFromList: "{prefix}&cYou do not have permission to use addfromlist."
   reloadSuccess: "{prefix}&aConfig reloaded successfully."
   reloadFailed: "{prefix}&cFailed to reload config.yml. Check console for details."
   usagePlayer: "{prefix}&eUse /tebexclaimsystem to open your claim GUI."
-  usageConsole: "{prefix}&eUsage: tebexclaimsystem <add <username> <productName> <quantity>|reload>"
+  usageConsole: "{prefix}&eUsage: tebexclaimsystem <add <username> <productName> <quantity>|addfromlist <fileName> <productName> <quantity>|reload>"
+  usageAddFromList: "{prefix}&eUsage: /tebexclaimsystem addfromlist <fileName> <productName> <quantity>"
   claimAdded: "{prefix}&aAdded &f{quantity}x {product}&a to &f{player}&a's pending claims."
+  claimAddedFromList: "{prefix}&aAdded &f{quantity}x {product}&a to &f{count}&a players from &f{file}&a."
+  fileNotFound: "{prefix}&cFile not found: &f{file}&c."
+  fileReadError: "{prefix}&cError reading file &f{file}&c: &f{error}&c."
+  noUsersInFile: "{prefix}&cNo valid usernames found in &f{file}&c."
   noClaimForProduct: "{prefix}&cNo pending claim found for that product."
   claimAllNothing: "{prefix}&7You have nothing to claim right now."
   clickHint: "&eLeft-click to claim all"
   clickHintRight: "&eRight-click to claim 1"
-

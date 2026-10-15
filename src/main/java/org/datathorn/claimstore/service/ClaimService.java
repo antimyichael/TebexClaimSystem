@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,10 @@ public class ClaimService {
 
     public void addPendingClaim(String playerName, String productId, int quantity) {
         repository.addClaim(playerName, productId, quantity);
+    }
+
+    public void addPendingClaims(Collection<String> playerNames, String productId, int quantity) {
+        repository.addClaims(playerNames, productId, quantity);
     }
 
     public Map<String, Integer> getPendingClaims(String playerName) {
